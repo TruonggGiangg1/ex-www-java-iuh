@@ -3,4 +3,34 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
          version="5.0">
+
+
+<!--        display-name: Tên hiển thị (tuỳ chọn, chỉ mô tả).-->
+<!--        servlet-name: Tên định danh của servlet (quan trọng để mapping).-->
+<!--        init-param: Tham số khởi tạo riêng cho servlet này.-->
+    <servlet>
+        <servlet-name>bai4</servlet-name>
+        <servlet-class>com.example.lab1._22654701letruonggianglab1.servlet.Bai4</servlet-class>  <!-- THIẾU -->
+        <init-param>
+            <param-name>Greetings</param-name>
+            <param-value>Hello</param-value>
+        </init-param>
+    </servlet>
+<!--    Nối servlet-name với URL cụ thể (/bai4).-->
+<!--    Khi trình duyệt gọi /bai4, servlet bai4 sẽ được thực thi.-->
+    <servlet-mapping>
+        <servlet-name>bai4</servlet-name>
+        <url-pattern>/bai4</url-pattern>
+    </servlet-mapping>
+    <context-param>
+        <param-name>Country</param-name>
+        <param-value>India</param-value>
+    </context-param>
+    <context-param>
+        <param-name>Age</param-name>
+        <param-value>24</param-value>
+    </context-param>
+
+
+
 </web-app>
