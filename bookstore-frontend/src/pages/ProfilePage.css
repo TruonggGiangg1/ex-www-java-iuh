@@ -1,0 +1,122 @@
+.profile {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.profile__header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile__header h1 {
+  margin: 0;
+  color: #0f172a;
+}
+
+.profile__header span {
+  font-size: 1rem;
+  color: #6366f1;
+}
+
+.profile__header button {
+  padding: 0.6rem 1.3rem;
+  border-radius: 12px;
+  border: none;
+  background: rgba(239, 68, 68, 0.15);
+  color: #b91c1c;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.profile__section {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.profile__card {
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 20px;
+  padding: 1.8rem;
+  box-shadow: 0 30px 60px -55px rgba(15, 23, 42, 0.5);
+}
+
+.profile__card dl {
+  margin: 0;
+  display: grid;
+  gap: 1rem;
+}
+
+.profile__card dt {
+  font-weight: 700;
+  color: rgba(15, 23, 42, 0.7);
+}
+
+.profile__timeline {
+  display: grid;
+  gap: 1rem;
+}
+
+.profile__timeline article {
+  background: #fff;
+  padding: 1.2rem 1.4rem;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px -45px rgba(15, 23, 42, 0.55);
+}
+
+.profile__timeline h3 {
+  margin: 0 0 0.4rem;
+}
+
+.profile__timeline p {
+  margin: 0;
+  color: rgba(15, 23, 42, 0.6);
+}
+
+.profile-login {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-login form {
+  max-width: 420px;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 20px;
+  padding: 2rem;
+  display: grid;
+  gap: 1.2rem;
+  box-shadow: 0 35px 70px -60px rgba(15, 23, 42, 0.55);
+}
+
+.profile-login h1 {
+  margin: 0;
+}
+
+.profile-login label {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.profile-login input {
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+}
+
+.profile-login button {
+  padding: 0.8rem 1.2rem;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(135deg, #6366f1, #22d3ee);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.profile-login__error {
+  margin: 0;
+  color: #ef4444;
+}
