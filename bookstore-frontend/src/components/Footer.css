@@ -1,0 +1,53 @@
+.footer {
+  background: #0f172a;
+  color: rgba(255, 255, 255, 0.7);
+  padding: 3rem 1.5rem 1.5rem;
+  margin-top: 4rem;
+}
+
+.footer__inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 2.5rem;
+}
+
+.footer__brand {
+  color: #f8fafc;
+  margin-bottom: 0.75rem;
+}
+
+.footer__text {
+  max-width: 420px;
+  margin: 0;
+  line-height: 1.7;
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 1.5rem;
+}
+
+.footer__title {
+  color: #f8fafc;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer__link {
+  display: inline-flex;
+  padding: 0.25rem 0;
+  color: inherit;
+}
+
+.footer__link:hover {
+  color: #38bdf8;
+}
+
+.footer__legal {
+  margin-top: 2.5rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}

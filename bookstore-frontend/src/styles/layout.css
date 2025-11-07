@@ -1,0 +1,16 @@
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.app-shell__content {
+  flex: 1;
+  padding: 2rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .app-shell__content {
+    padding: 3rem clamp(2rem, 5vw, 6rem);
+  }
+}
