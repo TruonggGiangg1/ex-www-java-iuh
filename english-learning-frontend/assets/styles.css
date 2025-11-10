@@ -1,0 +1,204 @@
+:root {
+  font-family: 'Be Vietnam Pro', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #172b4d;
+  background-color: #f4f6fb;
+  line-height: 1.6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.hero {
+  background: linear-gradient(135deg, #0047ff 0%, #7c4dff 100%);
+  color: #fff;
+  padding: 72px 24px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 42px;
+  margin-bottom: 16px;
+}
+
+.hero p {
+  font-size: 18px;
+  max-width: 640px;
+  margin: 0 auto 32px;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 12px 24px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary {
+  background-color: #fff;
+  color: #0047ff;
+  box-shadow: 0 12px 32px rgba(12, 83, 255, 0.25);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+.container {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 48px 24px;
+}
+
+.section-title {
+  font-size: 28px;
+  margin-bottom: 24px;
+}
+
+.course-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.course-card {
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: transform 0.25s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-6px);
+}
+
+.course-card h3 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  border-radius: 999px;
+  padding: 6px 14px;
+  background: rgba(63, 81, 181, 0.12);
+  color: #3f51b5;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.details-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 960px) {
+  .details-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.detail-panel {
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+}
+
+.lesson-card {
+  background: #f8f9ff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+
+.lesson-card h4 {
+  margin: 0 0 12px;
+}
+
+.video-list,
+.exercise-list {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+input, select {
+  border-radius: 10px;
+  border: 1px solid #c5c9d6;
+  padding: 12px 14px;
+  font-size: 15px;
+}
+
+.progress-box {
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px;
+  margin-top: 24px;
+  box-shadow: inset 0 0 0 1px rgba(0, 71, 255, 0.2);
+}
+
+.progress-bar {
+  height: 12px;
+  background: rgba(0, 71, 255, 0.15);
+  border-radius: 999px;
+  margin-top: 12px;
+  overflow: hidden;
+}
+
+.progress-bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #0047ff 0%, #36d1dc 100%);
+}
+
+footer {
+  background: #0b1e5b;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 36px 24px;
+  text-align: center;
+  margin-top: 72px;
+}
+
+footer a {
+  color: #88c4ff;
+  text-decoration: none;
+}
