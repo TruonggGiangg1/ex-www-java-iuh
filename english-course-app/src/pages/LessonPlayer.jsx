@@ -1,20 +1,76 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import MockApi from '../api/MockApi.js';
+import CourseApi from '../api/client.js';
 import Section from '../components/ui/Section.jsx';
 
 function LessonPlayer() {
   const { lessonId } = useParams();
   const [lesson, setLesson] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    MockApi.getLessons().then((lessons) => {
-      setLesson(lessons.find((item) => item.id === lessonId) ?? lessons[0]);
-    });
+    let cancelled = false;
+
+    async function loadLesson() {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const data = await CourseApi.getLessonById(lessonId);
+        if (!cancelled) {
+          setLesson(data);
+        }
+      } catch (primaryError) {
+        if (cancelled) {
+          return;
+        }
+
+        try {
+          const lessons = await CourseApi.getLessons();
+          const fallback = lessons.find((item) => item.id === lessonId) ?? lessons[0] ?? null;
+
+          if (!cancelled) {
+            if (fallback) {
+              setLesson(fallback);
+              setError(null);
+            } else {
+              setError(primaryError);
+            }
+          }
+        } catch (fallbackError) {
+          if (!cancelled) {
+            setError(fallbackError);
+          }
+        }
+      } finally {
+        if (!cancelled) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadLesson();
+
+    return () => {
+      cancelled = true;
+    };
   }, [lessonId]);
 
-  if (!lesson) {
+  if (loading) {
     return <p>Loading lesson...</p>;
+  }
+
+  if (error) {
+    return (
+      <p role="alert" style={{ color: '#b91c1c' }}>
+        Unable to load lesson data right now. {error.message}
+      </p>
+    );
+  }
+
+  if (!lesson) {
+    return <p role="alert">Lesson not found.</p>;
   }
 
   return (

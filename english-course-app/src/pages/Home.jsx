@@ -43,7 +43,9 @@ function CourseCard({ course }) {
 }
 
 function Home() {
-  const { featured } = useStore();
+  const { featured, status, error } = useStore();
+  const isLoading = status === 'loading';
+  const hasError = status === 'error';
   const offerEnds = new Date();
   offerEnds.setDate(offerEnds.getDate() + 4);
 
@@ -67,17 +69,25 @@ function Home() {
           </Link>
         }
       >
-        <div
-          style={{
-            display: 'grid',
-            gap: '1.5rem',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))'
-          }}
-        >
-          {featured.map((course) => (
-            <CourseCard key={course.id} course={course} />
-          ))}
-        </div>
+        {hasError ? (
+          <p role="alert" style={{ color: '#b91c1c' }}>
+            Unable to load featured courses right now. {error?.message}
+          </p>
+        ) : (
+          <div
+            style={{
+              display: 'grid',
+              gap: '1.5rem',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))'
+            }}
+          >
+            {isLoading && featured.length === 0 ? (
+              <p style={{ gridColumn: '1 / -1' }}>Loading curated courses...</p>
+            ) : (
+              featured.map((course) => <CourseCard key={course.id} course={course} />)
+            )}
+          </div>
+        )}
       </Section>
 
       <Section

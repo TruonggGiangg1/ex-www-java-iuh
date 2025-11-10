@@ -1,21 +1,68 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import MockApi from '../api/MockApi.js';
+import CourseApi from '../api/client.js';
 import Section from '../components/ui/Section.jsx';
 import Price from '../components/ui/Price.jsx';
 import { useStore } from '../context/StoreContext.jsx';
 
 function CourseDetail() {
   const { courseId } = useParams();
-  const { addToCart } = useStore();
-  const [course, setCourse] = useState(null);
+  const { addToCart, courses, status } = useStore();
+  const initialCourse = useMemo(() => courses.find((item) => item.id === courseId) ?? null, [courses, courseId]);
+  const [course, setCourse] = useState(initialCourse);
+  const [loading, setLoading] = useState(!initialCourse);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    MockApi.getCourseById(courseId).then(setCourse);
-  }, [courseId]);
+    if (initialCourse) {
+      setCourse(initialCourse);
+      setLoading(false);
+    }
+  }, [initialCourse]);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    if (!course && status !== 'loading') {
+      setLoading(true);
+      CourseApi.getCourseById(courseId)
+        .then((data) => {
+          if (!cancelled) {
+            setCourse(data);
+            setError(null);
+          }
+        })
+        .catch((err) => {
+          if (!cancelled) {
+            setError(err);
+          }
+        })
+        .finally(() => {
+          if (!cancelled) {
+            setLoading(false);
+          }
+        });
+    }
+
+    return () => {
+      cancelled = true;
+    };
+  }, [course, courseId, status]);
+
+  if (loading) {
+    return <p>Loading course details...</p>;
+  }
+
+  if (error) {
+    return (
+      <p role="alert" style={{ color: '#b91c1c' }}>
+        Unable to load the course right now. {error.message}
+      </p>
+    );
+  }
 
   if (!course) {
-    return <p>Loading course...</p>;
+    return <p role="alert">Course not found.</p>;
   }
 
   return (

@@ -1,5 +1,5 @@
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
-import MockApi from '../api/MockApi.js';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import CourseApi from '../api/client.js';
 
 const StoreContext = createContext();
 
@@ -9,12 +9,37 @@ export function StoreProvider({ children }) {
   const [featured, setFeatured] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [cart, setCart] = useState([]);
+  const [status, setStatus] = useState('idle');
+  const [error, setError] = useState(null);
+
+  const loadCatalog = useCallback(async () => {
+    setStatus('loading');
+    setError(null);
+
+    try {
+      const [coursesData, categoriesData] = await Promise.all([
+        CourseApi.getCourses(),
+        CourseApi.getCategories()
+      ]);
+
+      setCourses(coursesData);
+      setCategories(categoriesData);
+      setFeatured(
+        coursesData
+          .slice()
+          .sort((a, b) => b.rating - a.rating)
+          .slice(0, 2)
+      );
+      setStatus('ready');
+    } catch (err) {
+      setError(err);
+      setStatus('error');
+    }
+  }, []);
 
   useEffect(() => {
-    MockApi.getCourses().then(setCourses);
-    MockApi.getFeaturedCourses().then(setFeatured);
-    MockApi.getCategories().then(setCategories);
-  }, []);
+    loadCatalog();
+  }, [loadCatalog]);
 
   const addToCart = (course) => {
     setCart((prev) => {
@@ -42,9 +67,12 @@ export function StoreProvider({ children }) {
         setCart([]);
       },
       addToCart,
-      removeFromCart
+      removeFromCart,
+      status,
+      error,
+      refresh: loadCatalog
     }),
-    [courses, categories, featured, cart, currentUser]
+    [courses, categories, featured, cart, currentUser, status, error, loadCatalog]
   );
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;
